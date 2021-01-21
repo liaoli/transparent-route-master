@@ -4,6 +4,7 @@ import 'package:modalbottomsheet_app/transparent_page.dart';
 
 import './components/searchbar.dart';
 import './components/modal_trigger.dart';
+import 'gradient_text.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -34,6 +35,34 @@ class HomePage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                    opaque:false,
+                    pageBuilder: (context, animation, secondaryAnimation) {
+                      return GradientText();
+                    }
+                ),);
+            },
+            child:  ShaderMask(
+              shaderCallback: (Rect bounds) {
+                return LinearGradient(
+                  colors: <Color>[Colors.purple, Colors.red],
+                  tileMode: TileMode.mirror,
+                  begin: Alignment.topCenter,// 控制渐变开始的方向
+                  end: Alignment.bottomCenter,// 控制渐变结束的方向
+                ).createShader(bounds);
+              },
+              blendMode: BlendMode.srcATop,
+              child: Center(
+                child: Text(
+                  '我是渐变文字',
+                  style: TextStyle(fontSize: 24),
                 ),
               ),
             ),
